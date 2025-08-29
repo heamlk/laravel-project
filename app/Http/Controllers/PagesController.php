@@ -8,14 +8,11 @@ class PagesController extends Controller
 {
     public function homepage()
     {
-        $myName = 'John Doe';
-        $animals = array('Dog', 'Cat', 'Bird');
-
-        return view('homepage', array('name' => $myName, 'animals' => $animals));
+        return view('homepage');
     }
 
-    public function about()
+    public function single()
     {
-        return view('about');
+        return view('single');
     }
 }
