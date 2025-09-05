@@ -18,4 +18,31 @@ class UserController extends Controller
         User::create($incomingFields);
         return 'Registration logic will go here';
     }
+
+    public function login(Request $request)
+    {
+        $incomingFields = $request->validate([
+            'loginUserName' => ['required'],
+            'loginPassword' => ['required'],
+        ]);
+
+        if (auth()->attempt([
+            'username' => $incomingFields['loginUserName'],
+            'password' => $incomingFields['loginPassword']
+        ])) {
+            $request->session()->regenerate();
+            return 'Login successful';
+        } else {
+            return 'Login failed';
+        }
+    }
+
+    public function showCorrectHomepage()
+    {
+        if (auth()->check()) {
+            return view('homepage-feed');
+        } else {
+            return view('homepage');
+        }
+    }
 }
