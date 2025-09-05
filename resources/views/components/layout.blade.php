@@ -42,7 +42,8 @@
                     <a class="btn btn-sm btn-success mr-2" href="#">
                         Create Post
                     </a>
-                    <form action="#" method="POST" class="d-inline">
+                    <form action="/logout" method="POST" class="d-inline">
+                        @csrf
                         <button class="btn btn-sm btn-secondary">
                             Sign Out
                         </button>
@@ -71,6 +72,22 @@
         </div>
     </header>
     <!-- header ends here -->
+
+    @if (session()->has('success'))
+        <div class="container container--narrow">
+            <div class="alert alert-success text-center">
+                {{ session('success') }}
+            </div>
+        </div>
+    @endif
+
+    @if (session()->has('failure'))
+        <div class="container container--narrow">
+            <div class="alert alert-danger text-center">
+                {{ session('failure') }}
+            </div>
+        </div>
+    @endif
 
     {{ $slot }}
 

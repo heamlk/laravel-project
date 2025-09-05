@@ -15,8 +15,9 @@ class UserController extends Controller
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'password' => ['required', 'min:8', 'max:50', 'confirmed'],
         ]);
-        User::create($incomingFields);
-        return 'Registration logic will go here';
+        $user = User::create($incomingFields);
+        auth()->login($user);
+        return redirect('/')->with('success', 'Thank you for creating an account. You are now logged in.');
     }
 
     public function login(Request $request)
@@ -31,10 +32,18 @@ class UserController extends Controller
             'password' => $incomingFields['loginPassword']
         ])) {
             $request->session()->regenerate();
-            return 'Login successful';
+            return redirect('/')->with('success', 'You are now logged in.');
         } else {
-            return 'Login failed';
+            return redirect('/')->with('failure', 'Invalid login.');
         }
+    }
+
+    public function logout(Request $request)
+    {
+        auth()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/')->with('success', 'You have been logged out.');
     }
 
     public function showCorrectHomepage()
