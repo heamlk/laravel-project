@@ -13,3 +13,4 @@ Route::get('/', [UserController::class, 'showCorrectHomepage']);
 // Blog related routes
 Route::get('/create-post', [PostController::class, 'createPostForm']);
 Route::post('/create-post', [PostController::class, 'submitNewPost']);
+Route::get('/post/{post}', [PostController::class, 'viewSinglePost']);

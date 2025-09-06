@@ -19,4 +19,12 @@ class Post extends Model
         'content',
         'user_id'
     ];
+
+    /**
+     * Get the user that owns the post.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
