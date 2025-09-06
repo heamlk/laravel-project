@@ -39,7 +39,7 @@
                             style="width: 32px; height: 32px; border-radius: 16px"
                             src="https://gravatar.com/avatar/f64fc44c03a8a7eb1d52502950879659?s=128" />
                     </a>
-                    <a class="btn btn-sm btn-success mr-2" href="#">
+                    <a class="btn btn-sm btn-success mr-2" href="/create-post">
                         Create Post
                     </a>
                     <form action="/logout" method="POST" class="d-inline">
