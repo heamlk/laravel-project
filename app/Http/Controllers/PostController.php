@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -31,6 +32,10 @@ class PostController extends Controller
 
     public function viewSinglePost(Post $post)
     {
+        $post->content = strip_tags(
+            Str::markdown($post->content),
+            '<p><a><ul><ol><li><strong><em><h1><h2><h3><br><hr>'
+        );
         return view('single-post', ['post' => $post]);
     }
 }
