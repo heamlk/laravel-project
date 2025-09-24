@@ -11,9 +11,10 @@ Route::post('/login', [UserController::class, 'login'])->middleware('guest');
 Route::post('/logout', [UserController::class, 'logout'])->middleware('mustBeLoggedIn');
 
 // Blog related routes
-Route::get('/create-post', [PostController::class, 'createPostForm'])->middleware('mustBeLoggedIn');;
-Route::post('/create-post', [PostController::class, 'submitNewPost'])->middleware('mustBeLoggedIn');;
+Route::get('/create-post', [PostController::class, 'createPostForm'])->middleware('mustBeLoggedIn');
+Route::post('/create-post', [PostController::class, 'submitNewPost'])->middleware('mustBeLoggedIn');
 Route::get('/post/{post}', [PostController::class, 'viewSinglePost']);
+Route::delete('/post/{post}', [PostController::class, 'deletePost']);
 
 // Profile related routes
 Route::get('/profile/{user:username}', [UserController::class, 'userProfile']);

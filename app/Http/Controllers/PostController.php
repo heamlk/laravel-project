@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class PostController extends Controller
 {
+    use AuthorizesRequests;
+
     public function createPostForm()
     {
         return view('create-post');
@@ -37,5 +40,12 @@ class PostController extends Controller
             '<p><a><ul><ol><li><strong><em><h1><h2><h3><br><hr>'
         );
         return view('single-post', ['post' => $post]);
+    }
+
+    public function deletePost(Post $post)
+    {
+        $this->authorize('delete', $post);
+        $post->delete();
+        return redirect("/profile/{$post->user->username}")->with('success', 'Post successfully deleted.');
     }
 }
