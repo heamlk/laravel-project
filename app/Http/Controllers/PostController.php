@@ -5,12 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class PostController extends Controller
 {
-    use AuthorizesRequests;
-
     public function createPostForm()
     {
         return view('create-post');
@@ -42,9 +39,28 @@ class PostController extends Controller
         return view('single-post', ['post' => $post]);
     }
 
+    public function editPostForm(Post $post)
+    {
+        return view('edit-post', ['post' => $post]);
+    }
+
+    public function submitEditPost(Post $post, Request $request)
+    {
+        $incomingFields = $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+        ]);
+
+        $incomingFields['title'] = strip_tags($incomingFields['title']);
+        $incomingFields['content'] = strip_tags($incomingFields['content']);
+
+        $post->update($incomingFields);
+
+        return redirect("/post/{$post->id}")->with('success', 'Post successfully updated.');
+    }
+
     public function deletePost(Post $post)
     {
-        $this->authorize('delete', $post);
         $post->delete();
         return redirect("/profile/{$post->user->username}")->with('success', 'Post successfully deleted.');
     }
