@@ -4,6 +4,10 @@ use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
+Route::get('/admin', function () {
+    return 'Admin page - only for admins';
+})->middleware('can:viewAdminPage');
+
 // User related routes
 Route::get('/', [UserController::class, 'showCorrectHomepage'])->name('login');
 Route::post('/register', [UserController::class, 'register'])->middleware('guest');
