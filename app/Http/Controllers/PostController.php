@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function createPostForm()
+    public function showPostForm()
     {
         return view('create-post');
     }

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Intervention\Image\ImageManager;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class UserController extends Controller
 {
@@ -67,5 +70,40 @@ class UserController extends Controller
                 'postCount' => $posts->count()
             ]
         );
+    }
+
+    public function showAvatarForm()
+    {
+        return view('avatar-form');
+    }
+
+
+    public function storeAvatar(Request $request)
+    {
+        $request->validate([
+            'avatar' => 'required|image|max:2000'
+        ]);
+
+        $user = auth()->user();
+
+        $fileName = $user->id . '-' . uniqid() . '.jpg';
+
+        $oldAvatar = $user->avatar;
+
+        $manager = new ImageManager(new Driver());
+        $image = $manager->read($request->file('avatar'));
+        $imageData = $image->cover(120, 120)->toJpeg(90);
+
+        Storage::disk('public')->put('avatars/' . $fileName, $imageData);
+
+        $user->avatar = 'avatars/' . $fileName;
+        $user->save();
+
+        if ($oldAvatar != 'images/default-avatar.jpg') {
+            Storage::disk('public')->delete(str_replace("storage/", "", $oldAvatar));
+        }
+
+        return redirect('/profile/' . $user->username)
+            ->with('success', 'Avatar updated successfully.');
     }
 }
