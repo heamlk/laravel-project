@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follow;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -62,21 +63,18 @@ class UserController extends Controller
     {
         $posts = $user->posts()->latest()->get();
 
-        return view(
-            'profile-posts',
-            [
-                'user' => $user,
-                'posts' => $posts,
-                'postCount' => $posts->count()
-            ]
-        );
+        return view('profile-posts', [
+            'currentlyFollowing' => $user->isFollowedBy(auth()->user()),
+            'user' => $user,
+            'posts' => $posts,
+            'postCount' => $posts->count()
+        ]);
     }
 
     public function showAvatarForm()
     {
         return view('avatar-form');
     }
-
 
     public function storeAvatar(Request $request)
     {
