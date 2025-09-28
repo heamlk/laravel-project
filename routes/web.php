@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FollowController;
 
 Route::get('/admin', function () {
     return 'Admin page - only for admins';
@@ -15,6 +16,10 @@ Route::post('/login', [UserController::class, 'login'])->middleware('guest');
 Route::post('/logout', [UserController::class, 'logout'])->middleware('mustBeLoggedIn');
 Route::get('/manage-avatar', [UserController::class, 'showAvatarForm'])->middleware('mustBeLoggedIn');
 Route::post('/manage-avatar', [UserController::class, 'storeAvatar'])->middleware('mustBeLoggedIn');
+
+// Follow related routes
+Route::post('/create-follow/{user:username}', [FollowController::class, 'createFollow'])->middleware('mustBeLoggedIn');
+Route::post('/remove-follow/{user:username}', [FollowController::class, 'removeFollow'])->middleware('mustBeLoggedIn');
 
 // Blog related routes
 Route::get('/create-post', [PostController::class, 'showPostForm'])->middleware('mustBeLoggedIn');
