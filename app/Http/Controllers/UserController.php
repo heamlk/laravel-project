@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Follow;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\View;
 use Intervention\Image\ImageManager;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\View;
 use Intervention\Image\Drivers\Gd\Driver;
 
 class UserController extends Controller
@@ -65,7 +64,9 @@ class UserController extends Controller
         View::share('profileSharedData', [
             'currentlyFollowing' => $user->isFollowedBy(auth()->user()),
             'user' => $user,
-            'postCount' => $user->posts->count()
+            'postCount' => $user->posts->count(),
+            'followerCount' => $user->followers()->count(),
+            'followingCount' => $user->following()->count(),
         ]);
     }
 
@@ -82,8 +83,8 @@ class UserController extends Controller
     {
         $this->getProfileSharedData($user);
 
-        return view('profile-posts', [
-            'posts' => $user->posts()->latest()->get(),
+        return view('profile-followers', [
+            'followers' => $user->followers()->latest()->get(),
         ]);
     }
 
@@ -91,8 +92,8 @@ class UserController extends Controller
     {
         $this->getProfileSharedData($user);
 
-        return view('profile-posts', [
-            'posts' => $user->posts()->latest()->get(),
+        return view('profile-following', [
+            'following' => $user->following()->latest()->get(),
         ]);
     }
 

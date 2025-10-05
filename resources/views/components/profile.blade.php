@@ -38,11 +38,11 @@
             </a>
             <a href="/profile/{{ $profileSharedData['user']->username }}/followers"
                 class="profile-nav-link nav-item nav-link {{ request()->routeIs('profile.followers') ? 'active' : '' }}">
-                Followers: 3
+                Followers: {{ $profileSharedData['followerCount'] }}
             </a>
             <a href="/profile/{{ $profileSharedData['user']->username }}/following"
                 class="profile-nav-link nav-item nav-link {{ request()->routeIs('profile.following') ? 'active' : '' }}">
-                Following: 2
+                Following: {{ $profileSharedData['followingCount'] }}
             </a>
         </div>
 
