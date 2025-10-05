@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Intervention\Image\ImageManager;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\View;
 use Intervention\Image\Drivers\Gd\Driver;
 
 class UserController extends Controller
@@ -59,15 +60,39 @@ class UserController extends Controller
         }
     }
 
-    public function userProfile(User $user)
+    private function getProfileSharedData(User $user)
     {
-        $posts = $user->posts()->latest()->get();
-
-        return view('profile-posts', [
+        View::share('profileSharedData', [
             'currentlyFollowing' => $user->isFollowedBy(auth()->user()),
             'user' => $user,
-            'posts' => $posts,
-            'postCount' => $posts->count()
+            'postCount' => $user->posts->count()
+        ]);
+    }
+
+    public function userProfile(User $user)
+    {
+        $this->getProfileSharedData($user);
+
+        return view('profile-posts', [
+            'posts' => $user->posts()->latest()->get(),
+        ]);
+    }
+
+    public function userProfileFollowers(User $user)
+    {
+        $this->getProfileSharedData($user);
+
+        return view('profile-posts', [
+            'posts' => $user->posts()->latest()->get(),
+        ]);
+    }
+
+    public function userProfileFollowing(User $user)
+    {
+        $this->getProfileSharedData($user);
+
+        return view('profile-posts', [
+            'posts' => $user->posts()->latest()->get(),
         ]);
     }
 

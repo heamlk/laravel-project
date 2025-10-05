@@ -30,4 +30,6 @@ Route::get('/post/{post}/edit', [PostController::class, 'editPostForm'])->middle
 Route::put('/post/{post}', [PostController::class, 'submitEditPost'])->middleware('can:update,post');
 
 // Profile related routes
-Route::get('/profile/{user:username}', [UserController::class, 'userProfile']);
+Route::get('/profile/{user:username}', [UserController::class, 'userProfile'])->name('profile.posts');
+Route::get('/profile/{user:username}/followers', [UserController::class, 'userProfileFollowers'])->name('profile.followers');
+Route::get('/profile/{user:username}/following', [UserController::class, 'userProfileFollowing'])->name('profile.following');

@@ -1,6 +1,6 @@
 # 🚀 LaraLearn - Projeto do Curso "Let's Learn Laravel & Livewire"
 
-Este repositório contém o código-fonte do projeto `LaraLearn`, desenvolvido como parte do curso da Udemy **["Let's Learn Laravel & Livewire: A Guided Path For Beginners"](https://www.udemy.com/course/let-us-learn-laravel-a-guided-path-for-beginners/)**, ministrado pelo instrutor **[Brad Schiff](https://www.udemy.com/user/bradschiff/)**.
+Este repositório contém o código-fonte do projeto `LaraLearn`, desenvolvido como parte do curso da Udemy **["Let's Learn Laravel & Livewire: A Guided Path For Beginners"](https://www.udemy.com/course/lets-learn-laravel-a-guided-path-for-beginners/)**, ministrado pelo instrutor **[Brad Schiff](https://www.udemy.com/user/bradschiff/)**.
 
 O objetivo do projeto é construir uma aplicação social simples, semelhante a um blog ou Twitter, para praticar os conceitos fundamentais e as melhores práticas do ecossistema Laravel e Livewire.
 
@@ -13,7 +13,6 @@ Antes de começar, garanta que você tenha o seguinte ambiente de desenvolviment
 * Um ambiente de servidor local (ex: Laragon, XAMPP, WAMP, Herd)
 * PHP 8.2 ou superior
 * Composer
-* Node.js e NPM
 * Um banco de dados (MySQL, MariaDB, etc.)
 
 ---
@@ -24,7 +23,7 @@ Siga estes passos para configurar o projeto em um novo ambiente.
 
 1.  **Clonar o Repositório**
     ```bash
-    git clone [https://github.com/seu-usuario/laralearn.git](https://github.com/seu-usuario/laralearn.git)
+    git clone [https://github.com/Robson16/laralearn.git](https://github.com/Robson16/laralearn.git)
     cd laralearn
     ```
 
