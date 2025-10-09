@@ -66,6 +66,18 @@ class User extends Authenticatable
         return $this->hasMany(Post::class, 'user_id');
     }
 
+    public function feedPosts()
+    {
+        return $this->hasManyThrough(
+            Post::class,
+            Follow::class,
+            'user_id',
+            'user_id',
+            'id',
+            'followed_user'
+        );
+    }
+
     public function isFollowedBy(User $user = null): bool
     {
         if (!$user) {
