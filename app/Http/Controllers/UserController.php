@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Events\ExampleEvent;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\View;
@@ -35,6 +36,11 @@ class UserController extends Controller
             'username' => $incomingFields['loginUserName'],
             'password' => $incomingFields['loginPassword']
         ])) {
+            event(new ExampleEvent(
+                auth()->user()->username,
+                'login',
+            ));
+
             $request->session()->regenerate();
             return redirect('/')->with('success', 'You are now logged in.');
         } else {
@@ -44,6 +50,11 @@ class UserController extends Controller
 
     public function logout(Request $request)
     {
+        event(new ExampleEvent(
+            auth()->user()->username,
+            'logout',
+        ));
+
         auth()->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
