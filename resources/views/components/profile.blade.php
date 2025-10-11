@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout :docTitle="$docTitle">
     <div class="container py-md-5 container--narrow">
         <div class="row d-flex align-items-center gap-2">
             <img class="avatar-small" src="{{ asset($profileSharedData['user']->avatar) }}" />
