@@ -50,19 +50,37 @@ Follow these steps to set up the project in a new environment.
 4.  **Configure the Database**
     Open the `.env` file and configure your database variables (`DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`).
 
-5.  **Run the Migrations (❗️ Important)**
+5.  **Configure Pusher for Real-Time Chat (📡 Important)**
+    This project uses Pusher Channels for its real-time chat functionality.
+    
+    1.  Create a free account at [pusher.com](https://pusher.com/).
+    2.  Create a new **Channels** application.
+    3.  Go to the "App Keys" section of your new Pusher app and copy the credentials.
+    4.  Open your `.env` file and fill in the following variables:
+
+    ```env
+    BROADCAST_CONNECTION=pusher
+
+    PUSHER_APP_ID=your_app_id
+    PUSHER_APP_KEY=your_app_key
+    PUSHER_APP_SECRET=your_app_secret
+    PUSHER_APP_CLUSTER=your_app_cluster
+    ```
+    *The `VITE_PUSHER_...` variables will be populated automatically.*
+
+6.  **Run the Migrations (❗️ Important)**
     This command will create all the necessary tables in the database you configured.
     ```bash
     php artisan migrate
     ```
 
-6.  **Create the Storage Link (❗️ Important)**
+7.  **Create the Storage Link (❗️ Important)**
     To make file uploads (like avatars) publicly accessible, run this command. It creates a shortcut from `public/storage` to `storage/app/public`.
     ```bash
     php artisan storage:link
     ```
 
-7.  **Access the Application**
+8.  **Access the Application**
     Done! You can now access the project through your local server (e.g., `http://laralearn.test`).
 
 ---
