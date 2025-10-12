@@ -1,87 +1,87 @@
-# 🚀 LaraLearn - Projeto do Curso "Let's Learn Laravel & Livewire"
+# 🚀 LaraLearn - "Let's Learn Laravel & Livewire" Course Project
 
-Este repositório contém o código-fonte do projeto `LaraLearn`, desenvolvido como parte do curso da Udemy **["Let's Learn Laravel & Livewire: A Guided Path For Beginners"](https://www.udemy.com/course/lets-learn-laravel-a-guided-path-for-beginners/)**, ministrado pelo instrutor **[Brad Schiff](https://www.udemy.com/user/bradschiff/)**.
+This repository contains the source code for the `LaraLearn` project, developed as part of the Udemy course **["Let's Learn Laravel & Livewire: A Guided Path For Beginners"](https://www.udemy.com/course/lets-learn-laravel-a-guided-path-for-beginners/)**, taught by instructor **[Brad Schiff](https://www.udemy.com/user/bradschiff/)**.
 
-O objetivo do projeto é construir uma aplicação social simples, semelhante a um blog ou Twitter, para praticar os conceitos fundamentais e as melhores práticas do ecossistema Laravel e Livewire.
+The project's goal is to build a simple social application, similar to a blog or Twitter, to practice the fundamental concepts and best practices of the Laravel and Livewire ecosystem.
 
 ---
 
-## ⚙️ Pré-requisitos
+## ⚙️ Prerequisites
 
-Antes de começar, garanta que você tenha o seguinte ambiente de desenvolvimento configurado:
+Before you begin, ensure you have the following development environment set up:
 
-* Um ambiente de servidor local (ex: Laragon, XAMPP, WAMP, Herd)
-* PHP 8.2 ou superior
+* A local server environment (e.g., Laragon, XAMPP, WAMP, Herd)
+* PHP 8.2 or higher
 * Composer
-* Um banco de dados (MySQL, MariaDB, etc.)
+* A database (MySQL, MariaDB, etc.)
 
 ---
 
-## 📝 Guia de Instalação e Configuração
+## 📝 Installation and Setup Guide
 
-Siga estes passos para configurar o projeto em um novo ambiente.
+Follow these steps to set up the project in a new environment.
 
-1.  **Clonar o Repositório**
+1.  **Clone the Repository**
     ```bash
     git clone https://github.com/Robson16/laralearn.git
     cd laralearn
     ```
 
-2.  **Instalar Dependências do PHP**
-    Execute o Composer para baixar todos os pacotes necessários.
+2.  **Install PHP Dependencies**
+    Run Composer to download all the required packages.
     ```bash
     composer install
     ```
 
-3.  **Configurar o Ambiente**
-    Copie o arquivo de ambiente de exemplo e gere a chave da aplicação.
+3.  **Set Up the Environment**
+    Copy the example environment file and generate the application key.
     ```bash
-    # Para Windows
+    # For Windows
     copy .env.example .env
 
-    # Para MacOS/Linux
+    # For MacOS/Linux
     cp .env.example .env
     ```
-    Em seguida, gere a chave:
+    Then, generate the key:
     ```bash
     php artisan key:generate
     ```
 
-4.  **Configurar o Banco de Dados**
-    Abra o arquivo `.env` e configure as variáveis do seu banco de dados (`DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`).
+4.  **Configure the Database**
+    Open the `.env` file and configure your database variables (`DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`).
 
-5.  **Executar as Migrations (❗️ Importante)**
-    Este comando criará todas as tabelas necessárias no banco de dados que você configurou.
+5.  **Run the Migrations (❗️ Important)**
+    This command will create all the necessary tables in the database you configured.
     ```bash
     php artisan migrate
     ```
 
-6.  **Criar o Link da Pasta Storage (❗️ Importante)**
-    Para que os uploads de arquivos (como avatares) fiquem publicamente acessíveis, execute este comando. Ele cria um atalho de `public/storage` para `storage/app/public`.
+6.  **Create the Storage Link (❗️ Important)**
+    To make file uploads (like avatars) publicly accessible, run this command. It creates a shortcut from `public/storage` to `storage/app/public`.
     ```bash
     php artisan storage:link
     ```
 
-7.  **Acessar a Aplicação**
-    Pronto! Agora você pode acessar o projeto através do seu servidor local (ex: `http://laralearn.test`).
+7.  **Access the Application**
+    Done! You can now access the project through your local server (e.g., `http://laralearn.test`).
 
 ---
 
-## 🔧 Configuração Recomendada do `php.ini` (Crítico!)
+## 🔧 Recommended `php.ini` Configuration (Critical!)
 
-Para evitar problemas com upload de arquivos e processamento de imagens, é **altamente recomendado** que seu arquivo `php.ini` contenha as seguintes configurações. Em um ambiente como o Laragon, você pode acessar este arquivo facilmente pelo menu.
+To avoid common issues with file uploads and image processing, it is **highly recommended** that your `php.ini` file includes the following settings. In an environment like Laragon, you can easily access this file through the menu.
 
 ```ini
-; Garante que o PHP tenha permissão para escrever em uma pasta temporária.
-; Aponte para a pasta 'tmp' da sua instalação do Laragon ou similar.
+; Ensures that PHP has permission to write to a temporary folder.
+; Point this to the 'tmp' folder of your Laragon installation or similar.
 upload_tmp_dir = "C:/laragon/tmp"
 
-; Ativa a biblioteca GD, necessária para manipulação de imagens (ex: com a library Intervention/Image).
+; Enables the GD library, which is required for image manipulation (e.g., with the Intervention/Image library).
 extension=gd
 
-; Permite o envio de arquivos maiores (ajuste conforme necessário).
+; Allows for larger file uploads (adjust as needed).
 upload_max_filesize = 50M
 post_max_size = 50M
 ```
 
-**Lembre-se de reiniciar seu servidor (Apache/Nginx) após qualquer alteração no `php.ini`!**
+**Remember to restart your server (Apache/Nginx) after any changes to `php.ini`!**
