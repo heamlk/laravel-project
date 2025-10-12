@@ -23,7 +23,7 @@ Siga estes passos para configurar o projeto em um novo ambiente.
 
 1.  **Clonar o Repositório**
     ```bash
-    git clone [https://github.com/Robson16/laralearn.git](https://github.com/Robson16/laralearn.git)
+    git clone https://github.com/Robson16/laralearn.git
     cd laralearn
     ```
 
