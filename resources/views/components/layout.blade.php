@@ -23,25 +23,28 @@
         rel="stylesheet" />
     @vite(['resources/css/app.css'])
     @vite(['resources/js/app.js'])
+    @livewireStyles
 </head>
 
 <body>
     <header class="header-bar mb-3">
         <div class="container d-flex flex-column flex-md-row align-items-center p-3">
             <h4 class="my-0 mr-md-auto font-weight-normal">
-                <a href="/" class="text-white">LaraLearn</a>
+                <a wire:navigate href="/" class="text-white">LaraLearn</a>
             </h4>
             @auth
                 <div class="flex-row my-3 my-md-0">
-                    <livewire:search />
-                    <livewire:chat />
+                    @persist('header-dynamic')
+                        <livewire:search />
+                        <livewire:chat />
+                    @endpersist
 
-                    <a href="/profile/{{ auth()->user()->username }}" class="mr-2">
+                    <a wire:navigate href="/profile/{{ auth()->user()->username }}" class="mr-2">
                         <img title="My Profile" data-toggle="tooltip" data-placement="bottom"
                             style="width: 32px; height: 32px; border-radius: 16px"
                             src="{{ asset(auth()->user()->avatar) }}" />
                     </a>
-                    <a class="btn btn-sm btn-success mr-2" href="/create-post">
+                    <a wire:navigate class="btn btn-sm btn-success mr-2" href="/create-post">
                         Create Post
                     </a>
                     <form action="/logout" method="POST" class="d-inline">
@@ -97,7 +100,7 @@
     <footer class="border-top text-center small text-muted py-3">
         <p class="m-0">
             2022 - {{ date('Y') }} &copy;
-            <a href="/" class="text-muted">LaraLearn</a>.
+            <a wire:navigate href="/" class="text-muted">LaraLearn</a>.
             All rights reserved.
         </p>
     </footer>
@@ -114,6 +117,8 @@
     <script>
         $('[data-toggle="tooltip"]').tooltip()
     </script>
+
+    @livewireScripts
 </body>
 
 </html>

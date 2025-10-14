@@ -4,7 +4,7 @@
             <h2>{{ $post->title }}</h2>
             @can('update', $post)
                 <span class="pt-2">
-                    <a href="/post/{{ $post->id }}/edit" class="text-primary mr-2" data-toggle="tooltip"
+                    <a wire:navigate href="/post/{{ $post->id }}/edit" class="text-primary mr-2" data-toggle="tooltip"
                         data-placement="top" title="Edit">
                         <i class="fas fa-edit"></i>
                     </a>
@@ -21,11 +21,11 @@
         </div>
 
         <p class="text-muted small mb-4">
-            <a href="/profile/{{ $post->user->username }}">
+            <a wire:navigate href="/profile/{{ $post->user->username }}">
                 <img class="avatar-tiny" src="{{ asset($post->user->avatar) }}" />
             </a>
             Posted by
-            <a href="/profile/{{ $post->user->username }}">
+            <a wire:navigate href="/profile/{{ $post->user->username }}">
                 {{ $post->user->username }}
             </a>
             on {{ $post->created_at->format('F j, Y') }}

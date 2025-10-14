@@ -29,12 +29,12 @@
                         </div>
                     @else
                         <div class="chat-other">
-                            <a href="/profile/{{ $chat['username'] }}">
+                            <a wire:navigate href="/profile/{{ $chat['username'] }}">
                                 <img class="avatar-tiny" src="{{ $chat['avatar'] }}">
                             </a>
                             <div class="chat-message">
                                 <div class="chat-message-inner">
-                                    <a href="/profile/{{ $chat['username'] }}">
+                                    <a wire:navigate href="/profile/{{ $chat['username'] }}">
                                         <strong>{{ $chat['username'] }}:</strong>
                                     </a>
                                     {{ $chat['textValue'] }}
@@ -52,3 +52,15 @@
         </form>
     </div>
 </div>
+
+<script>
+    document.addEventListener('livewire:initialized', () => {
+        Livewire.hook('morph.added', (element) => {
+            if (element.el.classList.contains("chat-self") || element.el.classList.contains(
+                    "chat-other")) {
+                const chat = document.querySelector("#chat")
+                chat.scrollTop = chat.scrollHeight;
+            }
+        })
+    })
+</script>
