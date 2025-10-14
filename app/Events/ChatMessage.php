@@ -23,6 +23,7 @@ class ChatMessage implements ShouldBroadcastNow
     public function __construct($chat)
     {
         $this->chat = [
+            'selfMessage' => $chat['selfMessage'],
             'username' => $chat['username'],
             'avatar' => $chat['avatar'],
             'textValue' => $chat['textValue'],

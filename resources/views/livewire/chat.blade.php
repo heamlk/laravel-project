@@ -15,10 +15,40 @@
             </span>
         </div>
 
-        <div id="chat" class="chat-log"></div>
+        <div id="chat" class="chat-log">
+            @if (count($chatLog) > 0)
+                @foreach ($chatLog as $chat)
+                    @if ($chat['selfMessage'] == true)
+                        <div class="chat-self">
+                            <div class="chat-message">
+                                <div class="chat-message-inner">
+                                    {{ $chat['textValue'] }}
+                                </div>
+                            </div>
+                            <img class="chat-avatar avatar-tiny" src="{{ $chat['avatar'] }}">
+                        </div>
+                    @else
+                        <div class="chat-other">
+                            <a href="/profile/{{ $chat['username'] }}">
+                                <img class="avatar-tiny" src="{{ $chat['avatar'] }}">
+                            </a>
+                            <div class="chat-message">
+                                <div class="chat-message-inner">
+                                    <a href="/profile/{{ $chat['username'] }}">
+                                        <strong>{{ $chat['username'] }}:</strong>
+                                    </a>
+                                    {{ $chat['textValue'] }}
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            @endif
+        </div>
 
-        <form id="chatForm" class="chat-form border-top">
-            <input type="text" class="chat-field" id="chatField" placeholder="Type a message…" autocomplete="off" />
+        <form wire:submit="send" id="chatForm" class="chat-form border-top">
+            <input wire:model="textValue" type="text" class="chat-field" id="chatField" placeholder="Type a message…"
+                autocomplete="off" />
         </form>
     </div>
 </div>
