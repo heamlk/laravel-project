@@ -6,23 +6,11 @@
 
             @auth
                 @if (!$profileSharedData['currentlyFollowing'] && auth()->user()->id != $profileSharedData['user']->id)
-                    <form class="m-2 d-inline" action="/create-follow/{{ $profileSharedData['user']->username }}"
-                        method="POST">
-                        @csrf
-                        <button class="btn btn-primary btn-sm">
-                            Follow <i class="fas fa-user-plus"></i>
-                        </button>
-                    </form>
+                    <livewire:add-follow :username="$profileSharedData['user']->username" />
                 @endif
 
                 @if ($profileSharedData['currentlyFollowing'])
-                    <form class="m-2 d-inline" action="/remove-follow/{{ $profileSharedData['user']->username }}"
-                        method="POST">
-                        @csrf
-                        <button class="btn btn-danger btn-sm">
-                            Stop Following <i class="fas fa-user-times"></i>
-                        </button>
-                    </form>
+                    <livewire:remove-follow :username="$profileSharedData['user']->username" />
                 @endif
 
                 @if (auth()->user()->username == $profileSharedData['user']->username)
