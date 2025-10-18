@@ -2,9 +2,13 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
+use Intervention\Image\ImageManager;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Drivers\Gd\Driver;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -23,8 +27,36 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $sourcePath = database_path('seeders/avatars');
+        // List all image files in this folder
+        $imageFiles = File::files($sourcePath);
+
+        if (count($imageFiles) > 0) {
+            // Choose a random image file
+            $randomImage = $imageFiles[array_rand($imageFiles)];
+
+            // Create a unique file name
+            $fileName = uniqid() . '.jpg';
+
+            // Define the path that will be saved in the database
+            $avatarPath = 'avatars/' . $fileName;
+
+            // Create the image manager
+            $manager = new ImageManager(new Driver());
+
+            // Read the example image
+            $image = $manager->read($randomImage->getRealPath());
+
+            // Resize (cover) and convert to Jpeg with 90% quality
+            $imageData = $image->cover(120, 120)->toJpeg(90);
+
+            // Copy the file to the public/storage/avatars folder
+            Storage::disk('public')->put($avatarPath, $imageData);
+        }
+
         return [
             'username' => fake()->unique()->userName(),
+            'avatar' => $avatarPath ?? null,
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => 'password',
