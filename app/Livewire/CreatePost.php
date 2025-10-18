@@ -4,8 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Post;
 use Livewire\Component;
-use App\Mail\NewPostEmail;
-use Illuminate\Support\Facades\Mail;
+use App\Jobs\SendNewPostEmail;
 
 class CreatePost extends Component
 {
@@ -30,7 +29,8 @@ class CreatePost extends Component
 
         $newPost = Post::create($incomingFields);
 
-        Mail::to('test@google.com')->send(new NewPostEmail([
+        dispatch(new SendNewPostEmail([
+            'sendTo' => auth()->user()->email,
             'name' => auth()->user()->username,
             'title' => $newPost->title,
         ]));
