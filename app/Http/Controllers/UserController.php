@@ -27,6 +27,25 @@ class UserController extends Controller
         return redirect('/')->with('success', 'Thank you for creating an account. You are now logged in.');
     }
 
+    public function loginApi(Request $request)
+    {
+        $incomingFields = $request->validate([
+            'username' => ['required'],
+            'password' => ['required'],
+        ]);
+
+        if (auth()->attempt($incomingFields)) {
+            $user = auth()->user();
+
+            if ($user) {
+                $token = $user->createToken('lara-learn-token')->plainTextToken;
+                return response()->json(['token' => $token]);
+            }
+        }
+
+        return response()->json(['message' => 'Invalid credentials'], 401);
+    }
+
     public function login(Request $request)
     {
         $incomingFields = $request->validate([
