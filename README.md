@@ -1,6 +1,6 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="200" alt="Laravel Logo"></a></p>
 
-### LaraLearn - "Let's Learn Laravel & Livewire" Course Project
+<h1 align="center">LaraLearn - "Let's Learn Laravel & Livewire" Course Project</h1>
 
 <p align="center">
     <img alt="screenshot" title="Screenshot" src="./.github/screenshot.png" />
@@ -146,11 +146,10 @@ openssl.cafile="C:/laragon/etc/ssl/cacert.pem"
 * Laravel 12.x
 * Livewire 3.x
 * Alpine.js
-* Tailwind CSS (via Vite)
 * Pusher Channels (for broadcasting)
 * Laravel Sanctum (for API authentication)
 * Intervention Image
-* Laravel Scout (if configured for search)
+* Laravel Scout
 
 ---
 
