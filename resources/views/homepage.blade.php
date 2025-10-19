@@ -7,6 +7,7 @@
                      Are you sick of short tweets and impersonal &ldquo;shared&rdquo; posts that are reminiscent of the
                      late 90&rsquo;s email forwards? We believe getting back to actually writing is the key to enjoying
                      the internet again.
+                     Our users have authored {{ $postCount }} posts.
                  </p>
              </div>
              <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5">
