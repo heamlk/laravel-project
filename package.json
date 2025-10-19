@@ -1,5 +1,7 @@
 {
     "$schema": "https://json.schemastore.org/package.json",
+    "name": "LaraLearn",
+    "description": "Manages JavaScript/CSS dependencies and builds frontend assets using Vite for the LaraLearn Laravel/Livewire social application.",
     "private": true,
     "type": "module",
     "scripts": {
