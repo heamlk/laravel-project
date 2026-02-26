@@ -159,4 +159,3 @@ This project is licensed under the MIT License.
 
 ---
 
- ☕❤ [Robson H. Rodrigues](https://www.linkedin.com/in/robson-h-rodrigues-93341746/)
